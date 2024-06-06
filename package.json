@@ -1,11 +1,11 @@
 {
-  "name": "forum-ddd",
+  "name": "forum-app-with-ddd",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "vitest run",
-    "test:watch": "vitest"
+    "test": "vitest run --reporter verbose ",
+    "test:watch": "vitest --reporter verbose "
   },
   "keywords": [],
   "author": "",
