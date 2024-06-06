@@ -1,0 +1,17 @@
+{
+  "name": "forum-ddd",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx vitest run"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.14.2",
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
+  }
+}
