@@ -1,5 +1,3 @@
-import { describe, expect, it } from 'vitest'
-
 import { Slug } from './slug'
 
 describe('Value-objects: Slug', () => {
