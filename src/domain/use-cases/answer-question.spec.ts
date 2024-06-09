@@ -3,9 +3,8 @@ import { AnswersRepository } from '../repositories/answers-repository'
 import { Answer } from '../entities/answer'
 
 const fakeAnswersRepository: AnswersRepository = {
-  create: async (answer: Answer) => {
-    return
-  }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  create: async (answer: Answer) => {},
 }
 
 describe('Use-cases: Answer Question', () => {
@@ -15,7 +14,7 @@ describe('Use-cases: Answer Question', () => {
     const answer = await answerQuestion.execute({
       content: 'Nova resposta',
       instructorId: '1',
-      questionId: '1'
+      questionId: '1',
     })
 
     expect(answer.content).toEqual('Nova resposta')
