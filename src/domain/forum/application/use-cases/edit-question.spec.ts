@@ -1,4 +1,7 @@
-import { EditQuestionUseCase } from './edit-question'
+import {
+  EditQuestionUseCase,
+  EditQuestionUseCaseRequest,
+} from './edit-question'
 import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questions-repository'
 import { makeQuestion } from 'test/factories/make-question'
 
@@ -15,18 +18,18 @@ describe('Use-cases: Edit Question', () => {
     const newQuestion = makeQuestion()
     await inMemoryQuestionsRepository.create(newQuestion)
 
-    const updatedQuestion = {
+    const data: EditQuestionUseCaseRequest = {
       authorId: newQuestion.authorId.toString(),
       content: 'new content',
       questionId: newQuestion.id.toString(),
       title: 'new title',
     }
 
-    await sut.execute(updatedQuestion)
+    await sut.execute(data)
 
     expect(inMemoryQuestionsRepository.items[0]).toMatchObject({
-      content: updatedQuestion.content,
-      title: updatedQuestion.title,
+      content: data.content,
+      title: data.title,
     })
   })
 
@@ -34,7 +37,7 @@ describe('Use-cases: Edit Question', () => {
     const newQuestion = makeQuestion()
     await inMemoryQuestionsRepository.create(newQuestion)
 
-    const data = {
+    const data: EditQuestionUseCaseRequest = {
       authorId: 'other-author-id',
       content: 'new content',
       questionId: newQuestion.id.toString(),

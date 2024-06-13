@@ -1,14 +1,14 @@
 import { Question } from '../../enterprise/entities/question'
 import { QuestionRepository } from '../repositories/question-repository'
 
-interface EditQuestionUseCaseRequest {
+export interface EditQuestionUseCaseRequest {
   authorId: string
   content: string
   questionId: string
   title: string
 }
 
-interface EditQuestionUseCaseResponse {
+export interface EditQuestionUseCaseResponse {
   question: Question
 }
 

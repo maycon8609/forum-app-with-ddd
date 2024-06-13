@@ -1,11 +1,11 @@
 import { QuestionRepository } from '../repositories/question-repository'
 
-interface DeleteQuestionUseCaseRequest {
+export interface DeleteQuestionUseCaseRequest {
   authorId: string
   questionId: string
 }
 
-interface DeleteQuestionUseCaseResponse {}
+export interface DeleteQuestionUseCaseResponse {}
 
 export class DeleteQuestionUseCase {
   constructor(private questionRepository: QuestionRepository) {}

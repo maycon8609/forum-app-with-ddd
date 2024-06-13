@@ -3,13 +3,13 @@ import { UniqueEntityId } from '@/core/entities/unique-entity-id'
 import { Answer } from '../../enterprise/entities/answer'
 import { AnswersRepository } from '../repositories/answers-repository'
 
-interface AnswerQuestionUseCaseRequest {
+export interface AnswerQuestionUseCaseRequest {
   instructorId: string
   questionId: string
   content: string
 }
 
-interface AnswerQuestionUseCaseResponse {
+export interface AnswerQuestionUseCaseResponse {
   answer: Answer
 }
 

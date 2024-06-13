@@ -1,4 +1,7 @@
-import { DeleteAnswerUseCase } from './delete-answer'
+import {
+  DeleteAnswerUseCase,
+  DeleteAnswerUseCaseRequest,
+} from './delete-answer'
 import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-repository'
 import { makeAnswer } from 'test/factories/make-answer'
 
@@ -27,7 +30,7 @@ describe('Use-cases: Delete Answer', () => {
     const newAnswer = makeAnswer()
     await inMemoryAnswersRepository.create(newAnswer)
 
-    const data = {
+    const data: DeleteAnswerUseCaseRequest = {
       authorId: 'other-author-id',
       answerId: newAnswer.id.toString(),
     }

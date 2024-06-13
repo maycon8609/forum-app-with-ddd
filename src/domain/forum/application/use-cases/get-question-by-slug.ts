@@ -1,11 +1,11 @@
 import { Question } from '../../enterprise/entities/question'
 import { QuestionRepository } from '../repositories/question-repository'
 
-interface GetQuestionBySlugUseCaseRequest {
+export interface GetQuestionBySlugUseCaseRequest {
   slug: string
 }
 
-interface GetQuestionBySlugUseCaseResponse {
+export interface GetQuestionBySlugUseCaseResponse {
   question: Question
 }
 

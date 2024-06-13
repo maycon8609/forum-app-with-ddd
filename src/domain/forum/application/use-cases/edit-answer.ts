@@ -1,13 +1,13 @@
 import { Answer } from '../../enterprise/entities/answer'
 import { AnswersRepository } from '../repositories/answers-repository'
 
-interface EditAnswerUseCaseRequest {
+export interface EditAnswerUseCaseRequest {
   authorId: string
   content: string
   answerId: string
 }
 
-interface EditAnswerUseCaseResponse {
+export interface EditAnswerUseCaseResponse {
   answer: Answer
 }
 
