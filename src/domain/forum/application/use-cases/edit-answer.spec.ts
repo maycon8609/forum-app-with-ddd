@@ -1,6 +1,7 @@
-import { EditAnswerUseCase, EditAnswerUseCaseRequest } from './edit-answer'
+import { EditAnswerUseCase } from './edit-answer'
 import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-repository'
 import { makeAnswer } from 'test/factories/make-answer'
+import { NotAllowedError } from './errors/not-allowed-error'
 
 let inMemoryAnswersRepository: InMemoryAnswersRepository
 let sut: EditAnswerUseCase
@@ -15,16 +16,14 @@ describe('Use-cases: Edit Answer', () => {
     const newAnswer = makeAnswer()
     await inMemoryAnswersRepository.create(newAnswer)
 
-    const data: EditAnswerUseCaseRequest = {
+    await sut.execute({
       authorId: newAnswer.authorId.toString(),
       content: 'new content',
       answerId: newAnswer.id.toString(),
-    }
-
-    await sut.execute(data)
+    })
 
     expect(inMemoryAnswersRepository.items[0]).toMatchObject({
-      content: data.content,
+      content: 'new content',
     })
   })
 
@@ -32,12 +31,13 @@ describe('Use-cases: Edit Answer', () => {
     const newAnswer = makeAnswer()
     await inMemoryAnswersRepository.create(newAnswer)
 
-    const data: EditAnswerUseCaseRequest = {
+    const result = await sut.execute({
       authorId: 'other-author-id',
       content: 'new content',
       answerId: newAnswer.id.toString(),
-    }
+    })
 
-    expect(() => sut.execute(data)).rejects.toBeInstanceOf(Error)
+    expect(result.isLeft()).toBe(true)
+    expect(result.value).toBeInstanceOf(NotAllowedError)
   })
 })

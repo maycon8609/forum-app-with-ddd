@@ -1,9 +1,7 @@
-import {
-  DeleteQuestionUseCase,
-  DeleteQuestionUseCaseRequest,
-} from './delete-question'
+import { DeleteQuestionUseCase } from './delete-question'
 import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questions-repository'
 import { makeQuestion } from 'test/factories/make-question'
+import { NotAllowedError } from './errors/not-allowed-error'
 
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository
 let sut: DeleteQuestionUseCase
@@ -30,11 +28,12 @@ describe('Use-cases: Delete Question', () => {
     const newQuestion = makeQuestion()
     await inMemoryQuestionsRepository.create(newQuestion)
 
-    const data: DeleteQuestionUseCaseRequest = {
+    const result = await sut.execute({
       authorId: 'other-author-id',
       questionId: newQuestion.id.toString(),
-    }
+    })
 
-    expect(() => sut.execute(data)).rejects.toBeInstanceOf(Error)
+    expect(result.isLeft()).toBe(true)
+    expect(result.value).toBeInstanceOf(NotAllowedError)
   })
 })

@@ -22,17 +22,18 @@ describe('Use-cases: Comment On Question', () => {
     const question = makeQuestion()
 
     await inMemoryQuestionsRepository.create(question)
-
-    const { questionComment } = await sut.execute({
+    const result = await sut.execute({
       authorId: question.authorId.toString(),
       content: 'New comment',
       questionId: question.id.toString(),
     })
 
-    expect(questionComment.id).toBeTruthy()
-    expect(questionComment.content).toEqual('New comment')
-    expect(inMemoryQuestionCommentsRepository.items[0].id).toEqual(
-      questionComment.id,
-    )
+    expect(result.isRight()).toBe(true)
+
+    if (result.isRight()) {
+      expect(inMemoryQuestionCommentsRepository.items[0]).toEqual(
+        result.value.questionComment,
+      )
+    }
   })
 })

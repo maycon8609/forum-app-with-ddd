@@ -12,20 +12,39 @@ describe('Use-cases: Get Question By Slug', () => {
     sut = new GetQuestionBySlugUseCase(inMemoryQuestionsRepository)
   })
 
+  // it('should be able to get a question by slug', async () => {
+  //   const newQuestion = makeQuestion({
+  //     slug: Slug.create('title-to-question'),
+  //   })
+  //   await inMemoryQuestionsRepository.create(newQuestion)
+
+  //   const result = await sut.execute({
+  //     slug: 'title-to-question',
+  //   })
+
+  //   expect(question.id).toBeTruthy()
+  //   expect(question.content).toEqual(newQuestion.content)
+  //   expect(question.title).toEqual(newQuestion.title)
+  //   expect(question.slug.value).toEqual(newQuestion.slug.value)
+  //   expect(inMemoryQuestionsRepository.items[0].id).toEqual(question.id)
+  // })
+
   it('should be able to get a question by slug', async () => {
     const newQuestion = makeQuestion({
       slug: Slug.create('title-to-question'),
     })
     await inMemoryQuestionsRepository.create(newQuestion)
 
-    const { question } = await sut.execute({
+    const result = await sut.execute({
       slug: 'title-to-question',
     })
 
-    expect(question.id).toBeTruthy()
-    expect(question.content).toEqual(newQuestion.content)
-    expect(question.title).toEqual(newQuestion.title)
-    expect(question.slug.value).toEqual(newQuestion.slug.value)
-    expect(inMemoryQuestionsRepository.items[0].id).toEqual(question.id)
+    expect(result.isRight()).toBe(true)
+
+    if (result.isRight()) {
+      expect(inMemoryQuestionsRepository.items[0]).toEqual(
+        result.value.question,
+      )
+    }
   })
 })
