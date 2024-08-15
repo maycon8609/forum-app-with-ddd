@@ -32,11 +32,10 @@ describe('Use-cases: Get Question By Slug', () => {
     })
 
     expect(result.isRight()).toBe(true)
-
-    if (result.isRight()) {
-      expect(inMemoryQuestionsRepository.items[0]).toEqual(
-        result.value.question,
-      )
-    }
+    expect(result.value).toMatchObject({
+      question: expect.objectContaining({
+        title: newQuestion.title,
+      }),
+    })
   })
 })

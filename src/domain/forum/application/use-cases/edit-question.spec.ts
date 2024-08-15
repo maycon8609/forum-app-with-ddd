@@ -24,9 +24,6 @@ describe('Use-cases: Edit Question', () => {
       inMemoryQuestionAttachmentsRepository,
     )
 
-    inMemoryQuestionAttachmentsRepository =
-      new InMemoryQuestionAttachmentsRepository()
-
     sut = new EditQuestionUseCase(
       inMemoryQuestionsRepository,
       inMemoryQuestionAttachmentsRepository,
