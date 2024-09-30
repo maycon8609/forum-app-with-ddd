@@ -5,7 +5,7 @@ import { AnswersRepository } from '../repositories/answers-repository'
 import { AnswerCommentsRepository } from '../repositories/answer-comments-repository'
 
 import { Either, left, right } from '@/core/either'
-import { ResourceNotFoundError } from './errors/resource-not-found-error'
+import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 
 export interface CommentOnAnswerUseCaseRequest {
   authorId: string
